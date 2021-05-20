@@ -25,33 +25,36 @@ function generatePassword(){
   var userSpecialChar = window.prompt(
     "Would you like special characters in your password " +
     "enter 'y' for yes and 'n' for no.");
-
-  var lowercaseCharCodes = createArrayFromCharCodesTable(97, 122);
-  var uppercaseCharCodes = createArrayFromCharCodesTable(65, 90);
-  var numberCharCodes = createArrayFromCharCodesTable(48, 57);
-  var specialCharCodes = createArrayFromCharCodesTable(33, 47).concat(
-    createArrayFromCharCodesTable(58, 64));
-  // Check to see if the arrays are created
-  // console.log(lowercaseCharCodes);
-  // console.log(uppercaseCharCodes);
-  // console.log(numberCharCodes);
-  // console.log(specialCharCodes);
-
+  
+  
   // Create array with user input
   var generateCharCode = [];
   if(userLowercase === "y"){
+    var lowercaseCharCodes = createArrayFromCharCodesTable(97, 122);
+    // Check to see if the arrays are created
+    // console.log(lowercaseCharCodes);
     generateCharCode = generateCharCode.concat(lowercaseCharCodes);
   }
   if(userUppercase === "y"){
-    generateCharCode = generateCharCode.concat(uppercaseCharCodes);
+    var uppercaseCharCodes = createArrayFromCharCodesTable(65, 90);
+    // Check to see if the arrays are created
+    // console.log(uppercaseCharCodes);
+    generateCharCode = generateCharCode.concat(uppercaseCharCodes); 
   } 
   if(userNumber === "y"){
+    var numberCharCodes = createArrayFromCharCodesTable(48, 57);
+    // Check to see if the arrays are created
+    // console.log(numberCharCodes);
     generateCharCode = generateCharCode.concat(numberCharCodes);
   }
   if(userSpecialChar === "y"){
+    var specialCharCodes = createArrayFromCharCodesTable(33, 47).concat(
+      createArrayFromCharCodesTable(58, 64));
+    // Check to see if the arrays are created
+    // console.log(specialCharCodes);
     generateCharCode = generateCharCode.concat(specialCharCodes);
   }
-  // Check to see if genertateCharCode is created
+  // Check to see if generateCharCode is created
   // console.log(generateCharCode);
 
 
