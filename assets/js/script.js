@@ -3,79 +3,91 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+	var password = generatePassword();
+	var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+	passwordText.value = password;
 }
 
 // Get users input and create a password with the users criteria
-function generatePassword(){
-  var userPasswordLength = window.prompt(
-    "Choose a length of at least 8 - 128 characters.");
-  var userLowercase = window.prompt(
-    "Would you like lowercase in your password " + 
-    "enter 'y' for yes and 'n' for no.");
-  var userUppercase = window.prompt(
-    "Would you like uppercase in your password " +
-    "enter 'y' for yes and 'n' for no.");
-  var userNumber = window.prompt(
-    "Would you like numbers in your password " + 
-    "enter 'y' for yes and 'n' for no.");
-  var userSpecialChar = window.prompt(
-    "Would you like special characters in your password " +
-    "enter 'y' for yes and 'n' for no.");
-  
-  
-  // Create array with user input
-  var generateCharCode = [];
-  if(userLowercase === "y"){
-    var lowercaseCharCodes = createArrayFromCharCodesTable(97, 122);
-    // Check to see if the arrays are created
-    // console.log(lowercaseCharCodes);
-    generateCharCode = generateCharCode.concat(lowercaseCharCodes);
-  }
-  if(userUppercase === "y"){
-    var uppercaseCharCodes = createArrayFromCharCodesTable(65, 90);
-    // Check to see if the arrays are created
-    // console.log(uppercaseCharCodes);
-    generateCharCode = generateCharCode.concat(uppercaseCharCodes); 
-  } 
-  if(userNumber === "y"){
-    var numberCharCodes = createArrayFromCharCodesTable(48, 57);
-    // Check to see if the arrays are created
-    // console.log(numberCharCodes);
-    generateCharCode = generateCharCode.concat(numberCharCodes);
-  }
-  if(userSpecialChar === "y"){
-    var specialCharCodes = createArrayFromCharCodesTable(33, 47).concat(
-      createArrayFromCharCodesTable(58, 64));
-    // Check to see if the arrays are created
-    // console.log(specialCharCodes);
-    generateCharCode = generateCharCode.concat(specialCharCodes);
-  }
-  // Check to see if generateCharCode is created
-  // console.log(generateCharCode);
+function generatePassword() {
+	var userPasswordLength = window.prompt(
+		"Choose a length of at least 8 - 128 characters."
+	);
+	const intLength = parseInt(userPasswordLength, 10);
+	if (typeof intLength === "number" && (intLength < 8 || intLength > 128)) {
+		alert("Hmm that number is not between 8 and 128. Please try again!");
+		return "PLEASE TRY AGAIN";
+	} else if (!intLength) {
+		alert("Hmmm that isn't a number please try again!");
+		return "PLEASE TRY AGAIN";
+	}
+	var userLowercase = window.prompt(
+		"Would you like lowercase in your password " +
+			"enter 'y' for yes and 'n' for no."
+	);
+	var userUppercase = window.prompt(
+		"Would you like uppercase in your password " +
+			"enter 'y' for yes and 'n' for no."
+	);
+	var userNumber = window.prompt(
+		"Would you like numbers in your password " +
+			"enter 'y' for yes and 'n' for no."
+	);
+	var userSpecialChar = window.prompt(
+		"Would you like special characters in your password " +
+			"enter 'y' for yes and 'n' for no."
+	);
 
+	// Create array with user input
+	var generateCharCode = [];
+	if (userLowercase === "y") {
+		var lowercaseCharCodes = createArrayFromCharCodesTable(97, 122);
+		generateCharCode = generateCharCode.concat(lowercaseCharCodes);
+		// Check to see if the arrays are created
+		// console.log(lowercaseCharCodes);
+	}
+	if (userUppercase === "y") {
+		var uppercaseCharCodes = createArrayFromCharCodesTable(65, 90);
+		generateCharCode = generateCharCode.concat(uppercaseCharCodes);
+		// Check to see if the arrays are created
+		// console.log(uppercaseCharCodes);
+	}
+	if (userNumber === "y") {
+		var numberCharCodes = createArrayFromCharCodesTable(48, 57);
+		generateCharCode = generateCharCode.concat(numberCharCodes);
+		// Check to see if the arrays are created
+		// console.log(numberCharCodes);
+	}
+	if (userSpecialChar === "y") {
+		var specialCharCodes = createArrayFromCharCodesTable(33, 47).concat(
+			createArrayFromCharCodesTable(58, 64)
+		);
+		generateCharCode = generateCharCode.concat(specialCharCodes);
+		// Check to see if the arrays are created
+		// console.log(specialCharCodes);
+	}
+	// Check to see if generateCharCode is created
+	// console.log(generateCharCode);
 
-  // Create the password with user input
-  var generatePasswordChar = [];
-  for (var i = 0; i < userPasswordLength; i++){
-    var passwordCharCode = generateCharCode[Math.floor(Math.random() * 
-      generateCharCode.length)];
-      generatePasswordChar.push(String.fromCharCode(passwordCharCode));
-  }
+	// Create the password with user input
+	var generatePasswordChar = [];
+	for (var i = 0; i < userPasswordLength; i++) {
+		var passwordCharCode =
+			generateCharCode[Math.floor(Math.random() * generateCharCode.length)];
+		generatePasswordChar.push(String.fromCharCode(passwordCharCode));
+	}
 
-  return generatePasswordChar.join('');
+	return generatePasswordChar.join("");
 }
 
 // Create array for character codes table
-function createArrayFromCharCodesTable(low, high){
-  var charCodeArray = [];
-  for (var i = low; i <= high; i++){
-    charCodeArray.push(i);
-  }
-  return charCodeArray;
+function createArrayFromCharCodesTable(low, high) {
+	var charCodeArray = [];
+	for (var i = low; i <= high; i++) {
+		charCodeArray.push(i);
+	}
+	return charCodeArray;
 }
 
 // Add event listener to generate button
